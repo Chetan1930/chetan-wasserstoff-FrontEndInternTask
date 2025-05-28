@@ -1,73 +1,167 @@
-# Welcome to your Lovable project
 
-## Project info
+# CollaboEdit - Real-Time Collaborative Editor
 
-**URL**: https://lovable.dev/projects/13708006-ae1f-49ba-8fbd-6d72c270e602
+A modern real-time collaborative text editor with a custom component library built using React, TypeScript, and Tailwind CSS.
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+### Collaborative Editor
+- **Real-time collaboration**: Multiple users can edit simultaneously
+- **User identification**: Unique avatars and colors for each user
+- **Live cursors**: See other users' cursor positions in real-time
+- **Activity tracking**: Monitor recent edits and user activity
+- **Responsive design**: Works seamlessly on all devices
 
-**Use Lovable**
+### Custom Component Library
+- **Button**: Multiple variants (primary, secondary, outline, ghost) and sizes
+- **Card**: Flexible container with customizable padding and shadows
+- **Input**: Form inputs with labels, error states, and icon support
+- **Badge**: Status indicators with semantic color variants
+- **Avatar**: User profile pictures with automatic initials generation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/13708006-ae1f-49ba-8fbd-6d72c270e602) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first CSS framework
+- **Vite** - Fast build tool and dev server
+- **React Router** - Client-side routing
+- **Lucide React** - Beautiful icons
 
-**Use your preferred IDE**
+## 📦 Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd collabo-edit
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+2. Install dependencies:
+```bash
+npm install
+```
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧩 Component Library Usage
 
-**Use GitHub Codespaces**
+All components are located in `/src/lib/components/` and can be imported individually:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Button Component
+```tsx
+import { Button } from '@/lib/components';
 
-## What technologies are used for this project?
+<Button variant="primary" size="lg">
+  Click me
+</Button>
+```
 
-This project is built with:
+### Card Component
+```tsx
+import { Card } from '@/lib/components';
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+<Card hover padding="lg" shadow="lg">
+  <h3>Card Title</h3>
+  <p>Card content</p>
+</Card>
+```
 
-## How can I deploy this project?
+### Input Component
+```tsx
+import { Input } from '@/lib/components';
 
-Simply open [Lovable](https://lovable.dev/projects/13708006-ae1f-49ba-8fbd-6d72c270e602) and click on Share -> Publish.
+<Input
+  label="Username"
+  placeholder="Enter username"
+  error="This field is required"
+  icon={<User size={16} />}
+/>
+```
 
-## Can I connect a custom domain to my Lovable project?
+### Badge Component
+```tsx
+import { Badge } from '@/lib/components';
 
-Yes, you can!
+<Badge variant="success">Success</Badge>
+<Badge variant="warning" size="sm">Warning</Badge>
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Avatar Component
+```tsx
+import { Avatar } from '@/lib/components';
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+<Avatar name="John Doe" size="lg" />
+<Avatar name="Jane Smith" color="bg-purple-500" />
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── lib/
+│   └── components/          # Custom component library
+│       ├── Button.tsx
+│       ├── Card.tsx
+│       ├── Input.tsx
+│       ├── Badge.tsx
+│       ├── Avatar.tsx
+│       └── index.ts
+├── components/
+│   ├── CollaborativeEditor.tsx
+│   └── Navigation.tsx
+├── pages/                   # Demo pages
+│   ├── Index.tsx           # Main editor page
+│   ├── ComponentDemo.tsx   # Interactive component demos
+│   └── ComponentShowcase.tsx # Component documentation
+└── ...
+```
+
+## 🎯 Demo Pages
+
+1. **Main Editor** (`/`) - The collaborative text editor
+2. **Component Demo** (`/demo`) - Interactive showcase of all components
+3. **Documentation** (`/showcase`) - Complete component documentation with code examples
+
+## 🚀 Deployment
+
+The application can be deployed to any static hosting service:
+
+```bash
+npm run build
+```
+
+This creates a `dist` folder with the production build.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📝 Component Design Principles
+
+- **Reusable**: Each component is self-contained and reusable
+- **TypeScript**: Full type safety with proper interfaces
+- **Accessible**: Built with accessibility in mind
+- **Customizable**: Props for styling and behavior customization
+- **Lightweight**: Each component under 200 lines of code
+- **Modern**: Uses latest React patterns and best practices
+
+## 🔧 Development
+
+- Hot reload for instant feedback
+- TypeScript for type safety
+- ESLint for code quality
+- Tailwind CSS for rapid styling
+- Component-driven development
+
+## 📄 License
+
+MIT License - feel free to use this project for learning and development!
