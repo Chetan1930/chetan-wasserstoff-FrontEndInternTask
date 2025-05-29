@@ -75,6 +75,9 @@ export const CollaborativeEditor: React.FC = () => {
     }))
   ].filter(user => user.name);
 
+  const characterCount = content.length;
+  const onlineCount = activeUsers.length;
+
   return (
     <>
       <UsernameDialog
@@ -84,26 +87,40 @@ export const CollaborativeEditor: React.FC = () => {
       />
       
       <div className="h-screen flex flex-col">
-        {/* Simple header with user count */}
+        {/* Header with stats */}
         <div className="flex items-center justify-between p-4 border-b bg-white">
           <h1 className="text-xl font-semibold text-gray-900">Collaborative Editor</h1>
-          <div className="flex items-center space-x-3">
-            {/* Show active users as colored dots */}
-            <div className="flex items-center space-x-1">
-              {activeUsers.map(user => (
-                <div
-                  key={user.id}
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: user.color }}
-                  title={user.name}
-                />
-              ))}
+          
+          <div className="flex items-center space-x-6">
+            {/* Character count */}
+            <div className="text-sm text-gray-600">
+              {characterCount} characters
             </div>
-            <span className="text-sm text-gray-600">{activeUsers.length} online</span>
+            
+            {/* Online users count */}
+            <div className="text-sm text-gray-600">
+              {onlineCount} online
+            </div>
+            
+            {/* User names */}
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-500">Users:</span>
+              <div className="flex items-center space-x-1">
+                {activeUsers.map(user => (
+                  <span
+                    key={user.id}
+                    className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full text-white"
+                    style={{ backgroundColor: user.color }}
+                  >
+                    {user.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Simple full-screen editor */}
+        {/* Editor */}
         <div className="flex-1 relative">
           <textarea
             ref={textareaRef}
@@ -116,31 +133,6 @@ export const CollaborativeEditor: React.FC = () => {
             placeholder="Start typing to collaborate in real-time..."
             disabled={!userName}
           />
-          
-          {/* User cursors overlay */}
-          <div className="absolute inset-0 pointer-events-none">
-            {others.map(other => {
-              if (!other.presence?.name) return null;
-              return (
-                <div
-                  key={other.connectionId}
-                  className="absolute w-0.5 h-5 animate-pulse"
-                  style={{
-                    backgroundColor: other.presence.color,
-                    left: `${Math.random() * 90 + 5}%`,
-                    top: `${Math.random() * 80 + 10}%`,
-                  }}
-                >
-                  <div 
-                    className="absolute -top-6 -left-2 px-1 py-0.5 text-xs text-white rounded text-nowrap"
-                    style={{ backgroundColor: other.presence.color }}
-                  >
-                    {other.presence.name}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
     </>
