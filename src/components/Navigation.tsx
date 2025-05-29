@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/lib/components';
@@ -19,9 +18,16 @@ export const Navigation: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              <Code size={16} className="mr-2" />
-              GitHub
+            <Button variant="outline" size="sm" asChild>
+              <a
+                href="https://github.com/Chetan1930/chetan-wasserstoff-FrontEndInternTask"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                <Code size={16} className="mr-2" />
+                GitHub
+              </a>
             </Button>
           </div>
         </div>

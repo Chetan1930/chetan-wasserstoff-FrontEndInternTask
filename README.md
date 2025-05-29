@@ -32,8 +32,8 @@ A modern real-time collaborative text editor with a custom component library bui
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd collabo-edit
+git clone https://github.com/Chetan1930/chetan-wasserstoff-FrontEndInternTask
+cd chetan-wasserstoff-FrontEndInternTask
 ```
 
 2. Install dependencies:
