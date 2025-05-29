@@ -1,18 +1,10 @@
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from '@/lib/components';
-import { Code, Palette, Edit3 } from 'lucide-react';
+import { Code, Edit3 } from 'lucide-react';
 
 export const Navigation: React.FC = () => {
-  const location = useLocation();
-
-  const navItems = [
-    { path: '/', label: 'Editor', icon: Edit3 },
-    { path: '/demo', label: 'Demo', icon: Palette },
-    { path: '/showcase', label: 'Docs', icon: Code },
-  ];
-
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6">
@@ -24,26 +16,6 @@ export const Navigation: React.FC = () => {
               </div>
               <span className="font-bold text-xl text-gray-900">CollaboEdit</span>
             </Link>
-            
-            <div className="flex space-x-1">
-              {navItems.map(item => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-                
-                return (
-                  <Link key={item.path} to={item.path}>
-                    <Button
-                      variant={isActive ? 'primary' : 'ghost'}
-                      size="sm"
-                      className="flex items-center space-x-2"
-                    >
-                      <Icon size={16} />
-                      <span>{item.label}</span>
-                    </Button>
-                  </Link>
-                );
-              })}
-            </div>
           </div>
 
           <div className="flex items-center space-x-4">
