@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useMyPresence, useOthers, useMutation, useStorage } from '@/lib/liveblocks';
 import { UsernameDialog } from './UsernameDialog';
 
@@ -66,6 +66,26 @@ export const CollaborativeEditor: React.FC = () => {
     }
   }, [updateMyPresence]);
 
+  // Calculate cursor position in pixels
+  const getCursorPixelPosition = useCallback((position: number) => {
+    if (!textareaRef.current) return { top: 0, left: 0 };
+    
+    const textarea = textareaRef.current;
+    const textBeforeCursor = content.slice(0, position);
+    const lines = textBeforeCursor.split('\n');
+    const currentLine = lines.length - 1;
+    const currentColumn = lines[lines.length - 1].length;
+    
+    // Approximate line height and character width
+    const lineHeight = 24; // Adjust based on your CSS
+    const charWidth = 8; // Approximate character width
+    
+    return {
+      top: currentLine * lineHeight + 24, // Add padding offset
+      left: currentColumn * charWidth + 24 // Add padding offset
+    };
+  }, [content]);
+
   const activeUsers = [
     { id: 'me', name: userName, color: userColor },
     ...others.map(other => ({
@@ -112,7 +132,7 @@ export const CollaborativeEditor: React.FC = () => {
                     className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full text-white"
                     style={{ backgroundColor: user.color }}
                   >
-                    {user.name}
+                    {user.id === 'me' ? `${user.name} (You)` : user.name}
                   </span>
                 ))}
               </div>
@@ -132,7 +152,65 @@ export const CollaborativeEditor: React.FC = () => {
             className="w-full h-full resize-none border-none outline-none p-6 font-mono text-sm leading-relaxed bg-gray-50"
             placeholder="Start typing to collaborate in real-time..."
             disabled={!userName}
+            style={{ lineHeight: '24px' }}
           />
+          
+          {/* Cursor indicators for other users */}
+          {others.map(other => {
+            if (!other.presence?.name || typeof other.presence?.cursorPosition !== 'number') return null;
+            
+            const position = getCursorPixelPosition(other.presence.cursorPosition);
+            
+            return (
+              <div
+                key={other.connectionId}
+                className="absolute pointer-events-none z-10"
+                style={{
+                  top: position.top,
+                  left: position.left,
+                  transform: 'translateX(-2px)'
+                }}
+              >
+                {/* Cursor line */}
+                <div
+                  className="w-0.5 h-6"
+                  style={{ backgroundColor: other.presence.color }}
+                />
+                {/* User name label */}
+                <div
+                  className="absolute -top-6 left-0 px-1 py-0.5 text-xs text-white rounded whitespace-nowrap"
+                  style={{ backgroundColor: other.presence.color }}
+                >
+                  {other.presence.name}
+                </div>
+              </div>
+            );
+          })}
+          
+          {/* Your own cursor indicator */}
+          {userName && typeof myPresence?.cursorPosition === 'number' && (
+            <div
+              className="absolute pointer-events-none z-10"
+              style={{
+                top: getCursorPixelPosition(myPresence.cursorPosition).top,
+                left: getCursorPixelPosition(myPresence.cursorPosition).left,
+                transform: 'translateX(-2px)'
+              }}
+            >
+              {/* Your cursor line */}
+              <div
+                className="w-0.5 h-6"
+                style={{ backgroundColor: userColor }}
+              />
+              {/* Your name label */}
+              <div
+                className="absolute -top-6 left-0 px-1 py-0.5 text-xs text-white rounded whitespace-nowrap"
+                style={{ backgroundColor: userColor }}
+              >
+                {userName} (You)
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
