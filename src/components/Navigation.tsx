@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@/lib/components';
+import { Button } from '@/components/ui/button';
 import { Code, Edit3 } from 'lucide-react';
 
 export const Navigation: React.FC = () => {
