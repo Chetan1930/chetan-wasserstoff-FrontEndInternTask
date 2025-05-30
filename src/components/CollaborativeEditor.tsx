@@ -171,17 +171,18 @@ export const CollaborativeEditor: React.FC = () => {
                   transform: 'translateX(-2px)'
                 }}
               >
-                {/* Cursor line */}
+                {/* Cursor line with username */}
                 <div
-                  className="w-0.5 h-6"
-                  style={{ backgroundColor: other.presence.color }}
-                />
-                {/* User name label */}
-                <div
-                  className="absolute -top-6 left-0 px-1 py-0.5 text-xs text-white rounded whitespace-nowrap"
+                  className="w-0.5 h-6 relative"
                   style={{ backgroundColor: other.presence.color }}
                 >
-                  {other.presence.name}
+                  {/* Username on the cursor */}
+                  <div
+                    className="absolute -top-1 left-1 px-1 py-0.5 text-xs text-white rounded whitespace-nowrap font-medium shadow-sm"
+                    style={{ backgroundColor: other.presence.color }}
+                  >
+                    {other.presence.name}
+                  </div>
                 </div>
               </div>
             );
@@ -197,17 +198,18 @@ export const CollaborativeEditor: React.FC = () => {
                 transform: 'translateX(-2px)'
               }}
             >
-              {/* Your cursor line */}
+              {/* Your cursor line with username */}
               <div
-                className="w-0.5 h-6"
-                style={{ backgroundColor: userColor }}
-              />
-              {/* Your name label */}
-              <div
-                className="absolute -top-6 left-0 px-1 py-0.5 text-xs text-white rounded whitespace-nowrap"
+                className="w-0.5 h-6 relative"
                 style={{ backgroundColor: userColor }}
               >
-                {userName} (You)
+                {/* Your username on the cursor */}
+                <div
+                  className="absolute -top-1 left-1 px-1 py-0.5 text-xs text-white rounded whitespace-nowrap font-medium shadow-sm"
+                  style={{ backgroundColor: userColor }}
+                >
+                  {userName} (You)
+                </div>
               </div>
             </div>
           )}
