@@ -81,8 +81,8 @@ export const CollaborativeEditor: React.FC = () => {
     const charWidth = 8; // Approximate character width
     
     return {
-      top: currentLine * lineHeight + 24, // Add padding offset
-      left: currentColumn * charWidth + 24 // Add padding offset
+      top: currentLine * lineHeight + 30, // Add padding offset
+      left: currentColumn * charWidth + 100 // Add padding offset
     };
   }, [content]);
 
