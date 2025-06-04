@@ -67,7 +67,7 @@ export const CollaborativeEditor: React.FC = () => {
   }, [updateMyPresence]);
 
   // Calculate cursor position in pixels
-  const getCursorPixelPosition = useCallback((position: number) => {
+  const getCursorPixelPosition = (position: number) => {
     if (!textareaRef.current) return { top: 0, left: 0 };
     
     const textarea = textareaRef.current;
@@ -78,13 +78,12 @@ export const CollaborativeEditor: React.FC = () => {
     
     // Approximate line height and character width
     const lineHeight = 24; // Adjust based on your CSS
-    const charWidth = 8; // Approximate character width
+    const charWidth = 10; // Approximate character width
     
     return {
-      top: currentLine * lineHeight + 30, // Add padding offset
-      left: currentColumn * charWidth + 100 // Add padding offset
-    };
-  }, [content]);
+      top: currentLine * lineHeight + 25, // Add padding offset
+      left: currentColumn * charWidth + 25 // Add padding offset
+    }};
 
   const activeUsers = [
     { id: 'me', name: userName, color: userColor },
